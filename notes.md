@@ -42,3 +42,16 @@ In web application, both web app endpoints and api endpoints are there
 	api endpoint are used to response data
 
 In modern apps, instead of web app endpoints frontend routes are used with api endpoints.
+
+create default database tables 
+	python manage.py migrate
+
+create superuser
+	p15:p15
+
+create model in student app
+	python manage.py makemigrations
+	register model in admins module in student app
+	python manage.py migrate
+
+can check Student in admin panel
