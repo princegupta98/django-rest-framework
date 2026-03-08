@@ -55,3 +55,20 @@ create model in student app
 	python manage.py migrate
 
 can check Student in admin panel
+
+for api endpoint we send response using JsonResponse whihc expects dict type
+	1. we can convert queryset data to list type value by value and pass JsonResponse safe as False. But this manual serialization is not recommended for developing RestAPIs
+	2. we can use django-rest-framework inbuilt Serializer class. It serializes coplex data to json and also handles validatioin
+
+Serialization-
+	convert model instance(QuerySet) to json [vice/versa for deserialization]
+	translator for data
+	db data to format easily sent over the internet
+
+	Serializer
+		Model Serializer
+
+	for fucntion based views in drf we need to use api_view decorator and pass request method in it
+		use Response from rf.response
+		use status from rf
+		use api_view from rf.decorators
