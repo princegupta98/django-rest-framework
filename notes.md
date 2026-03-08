@@ -72,3 +72,8 @@ Serialization-
 		use Response from rf.response
 		use status from rf
 		use api_view from rf.decorators
+
+	to save data using Serializer pass data in its custom serializer class
+
+	fetch specific data using primary key and path param
+		Classes created in django models have unique property DoesNotExist which is used as exception if data is not found
