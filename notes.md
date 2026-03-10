@@ -88,4 +88,7 @@ Class Based Views-
 	- no conditional checks for methods instead we use instance methods such as get() post() put() delete() which automatically gets mapped to crud ops
 	- code reusability
 
-	
+	for class based
+	import APIView from rf.views instead of api_view decorator
+	create member function for each HTTP method inside this class, as its a member function self is required
+
