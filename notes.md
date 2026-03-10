@@ -66,8 +66,9 @@ Serialization-
 	db data to format easily sent over the internet
 
 	Serializer
-		Model Serializer
+		Model Serializer- provides fields for model, reduces code
 
+Function Based Views-
 	for fucntion based views in drf we need to use api_view decorator and pass request method in it
 		use Response from rf.response
 		use status from rf
@@ -77,3 +78,14 @@ Serialization-
 
 	fetch specific data using primary key and path param
 		Classes created in django models have unique property DoesNotExist which is used as exception if data is not found
+
+	updating data requires the object to be updated to be passed in Serializer along with request data
+
+	deleting data requires simple delete() call on the object
+
+Class Based Views-
+	- more structured and organized way to handle requests
+	- no conditional checks for methods instead we use instance methods such as get() post() put() delete() which automatically gets mapped to crud ops
+	- code reusability
+
+	
