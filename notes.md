@@ -92,3 +92,4 @@ Class Based Views-
 	import APIView from rf.views instead of api_view decorator
 	create member function for each HTTP method inside this class, as its a member function self is required
 
+	inside except block do not return Response, as the returned object will be assigned in some variable and when you serialize, it will not work because pk will not be found to serialize due to object type mismatch(model type & Response type)
