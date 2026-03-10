@@ -4,13 +4,13 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.views import APIView
+from rest_framework import mixins, generics
 
 from students.models import Student
 from employees.models import Employee
 from .serializers import EmployeeSerializer, StudentSerializer
 
 
-# Create your views here.
 # FUNCTION BASED VIEWS
 @api_view(["GET", "POST"])
 def studentsView(request):
@@ -61,7 +61,8 @@ def studentDetailView(request, pk):
         student.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
-
+"""
+# CLASS BASED VIEWS
 class Employees(APIView):
     def get(self, request):
         employees = Employee.objects.all()
@@ -98,3 +99,18 @@ class EmployeeDetail(APIView):
     def delete(self, request, pk):
         self.get_object(pk).delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+"""
+
+# MIXINS CLASSES
+class Employees(mixins.ListModelMixin, mixins.CreateModelMixin, generics.GenericAPIView):
+    queryset = Employee.objects.all()
+    serializer_class = EmployeeSerializer   
+
+    def get(self, request):
+        return self.list(request)
+    
+    def post(self, request):
+        return self.create(request)
+
+class EmployeeDetail(mixins.RetrieveModelMixin, generics.GenericAPIView):
+    pass

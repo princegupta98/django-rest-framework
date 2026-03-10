@@ -93,3 +93,55 @@ Class Based Views-
 	create member function for each HTTP method inside this class, as its a member function self is required
 
 	inside except block do not return Response, as the returned object will be assigned in some variable and when you serialize, it will not work because pk will not be found to serialize due to object type mismatch(model type & Response type)
+	for update operation Serializer class will take existing object from db and new object from request
+
+Mixins-
+	- mixin classes provide the actions that are used to provide the basic view behavior. Note that the mixin classes provide action methods rather than defining the handler methods, such as .get() and .post(), directly.
+	- reusable code classes in oop that provide specific functionalties
+	- used to add common functionality (CRUD) to views
+
+	Built-in mixins classes with their built in methods:
+
+		ListModelMixin		list()		get all
+		CreateModelMixin	create() 	post 
+		RetriewModelMixin	retrieve()  get by id
+		UpdateModelMixin	update()	put by id
+		DestroyModelMixin	destroy()	delete by id
+
+	to use mixins
+		from rf import mixins, generics
+		create class based view
+		inherit required mixin
+		inherit GenericApiView - foundational class for most api views, functionality for handling incoming http requests 
+
+		ex- class EMployees(mixins.ListModelMixin, generics.genericapiview)
+
+	internal flow-
+		URL router
+			↓
+		Employees.as_view()
+			↓
+		APIView.dispatch()
+			↓
+		get()
+			↓
+		self.list()
+			↓
+		get_queryset()
+			↓
+		Employee.objects.all()
+			↓
+		get_serializer(queryset, many=True)
+			↓
+		EmployeeSerializer(...)
+			↓
+		Response(serializer.data)
+
+	Conceptually Each component does one job:
+
+		GenericAPIView			infrastructure (isvalid save response errors)
+		ListModelMixin			GET list logic
+		CreateModelMixin		POST create logic
+		your class connects  	HTTP methods get/post/put/delete
+
+	
