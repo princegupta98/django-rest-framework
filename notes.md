@@ -139,9 +139,8 @@ Mixins-
 
 	Conceptually Each component does one job:
 
-		GenericAPIView			infrastructure (isvalid save response errors)
+		GenericAPIView			infrastructure (isvalid, save, request handling, response generation)
 		ListModelMixin			GET list logic
 		CreateModelMixin		POST create logic
 		your class connects  	HTTP methods get/post/put/delete
 
-	
