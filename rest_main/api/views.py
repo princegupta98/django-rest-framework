@@ -101,6 +101,7 @@ class EmployeeDetail(APIView):
         return Response(status=status.HTTP_204_NO_CONTENT)
 """
 
+"""
 # MIXINS CLASSES
 class Employees(mixins.ListModelMixin, mixins.CreateModelMixin, generics.GenericAPIView):
     queryset = Employee.objects.all()
@@ -124,3 +125,12 @@ class EmployeeDetail(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.
     
     def delete(self, request, pk):
         return self.destroy(request, pk)
+"""
+
+# GENERICS View
+class Employees(generics.ListAPIView, generics.CreateAPIView):
+    queryset = Employee.objects.all()
+    serializer_class = EmployeeSerializer
+
+class EmployeeDetail(generics.CreateAPIView):
+    pass

@@ -144,3 +144,23 @@ Mixins-
 		CreateModelMixin		POST create logic
 		your class connects  	HTTP methods get/post/put/delete
 
+GENERICS-
+	in mixins operations are performed by built-in functions but we still need to write get post methods for crud 
+	generics solves this by combining prebuilt view-classes and mixins that encapsulat common api  functionalities crud
+
+	in genrics we dont specify funnctoin
+	it just needs queryset serializer class and looukup field for pk operations
+
+	It provieds classes-
+	ListAPIView
+	CreateAPIView
+	RetrieveAPIView					pk
+	UpdateAPIView					pk
+	DestroyAPIView					pk
+
+	also combinaton of these
+	ListCreateAPIView
+	RetrieveUpdateAPIView			pk
+	RetrieveUpdateDestroyAPIView	pk
+
+	
