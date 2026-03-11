@@ -1,7 +1,7 @@
 from django.http import Http404, JsonResponse
 from django.shortcuts import render
 from rest_framework.response import Response
-from rest_framework import status
+from rest_framework import status, viewsets
 from rest_framework.decorators import api_view
 from rest_framework.views import APIView
 from rest_framework import mixins, generics
@@ -127,6 +127,7 @@ class EmployeeDetail(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.
         return self.destroy(request, pk)
 """
 
+"""
 # GENERICS View
 # class Employees(generics.ListAPIView, generics.CreateAPIView):
 class Employees(generics.ListCreateAPIView):
@@ -137,4 +138,22 @@ class Employees(generics.ListCreateAPIView):
 class EmployeeDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Employee.objects.all()
     serializer_class = EmployeeSerializer
+    lookup_field = 'pk'
 
+"""
+
+# VIEW SETS
+class EmployeeViewset(viewsets.ViewSet):    
+    def list(self, request):
+        queryset = Employee.objects.all()
+        serializer = EmployeeSerializer(queryset, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    def create(self, request):
+        serializer = EmployeeSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    

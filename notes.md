@@ -163,6 +163,8 @@ GENERICS-
 	RetrieveUpdateAPIView			pk
 	RetrieveUpdateDestroyAPIView	pk
 
+	NOTE: for pk operations lookup_field is by default pk which is mentioned in url so it works, but we change in url then we must specify lookup field in pk based generic view
+
 	Can't use these 2 non-pk views in different classes it gives error, we need to group pk operations in 1 class
 		ListAPIView
 		CreateAPIView
@@ -232,3 +234,27 @@ GENERICS-
 	REST organizes APIs around data resources.
 	RPC organizes APIs around functions/actions.
 
+VIEWSETS-
+	set of views
+	combines func of views & serializers
+	2 types- 
+		1) viewsets.ViewSet
+		in this DEFINE these methoods-
+			list()
+			create()
+			retrieve()
+			update()
+			delete()
+
+		2) viewsets.ModelViewSet
+			takes queryset serializer_class and provides both pk & non-pk based ops
+
+	it requires router
+		auto determies url patterns
+		register view to router
+
+	in urls.py  import DefaultRouter from rf.routers
+	router.register()
+		1st param is uri without /
+		2nd param is views.classname without as_view()
+		3rd param is basename which is model name (ONLY for ViewSet)
