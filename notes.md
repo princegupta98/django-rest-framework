@@ -258,3 +258,10 @@ VIEWSETS-
 		1st param is uri without /
 		2nd param is views.classname without as_view()
 		3rd param is basename which is model name (ONLY for ViewSet)
+
+	and in url path()
+		in 1st param empty string, it will be handled using regitser()
+		in 2nd param include() pass this default router variable. router.urls
+			NOTE: NOT AS STRINGS LIKE WE MENTION APP.URLS
+
+	for viewsets we dont need to create separate 2nd url for pk operations router will handle that
