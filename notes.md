@@ -163,4 +163,72 @@ GENERICS-
 	RetrieveUpdateAPIView			pk
 	RetrieveUpdateDestroyAPIView	pk
 
-	
+	Can't use these 2 non-pk views in different classes it gives error, we need to group pk operations in 1 class
+		ListAPIView
+		CreateAPIView
+
+	case 1: 
+	list and create are in diff class with diff name 
+	with same url only 1st url view will execute
+	django reslves top-to-bottom and stops at 1st url match
+
+	case 2: 
+	list and create are in diff class with diff name 
+	with different url it will work 
+	but it will lose REST consistency
+
+	REST vs RPC-
+	This is about API design philosophy.
+
+	RPC (Remote Procedure Call)-
+	API endpoints represent actions/functions.
+
+	Example:
+	POST /createEmployee
+	POST /deleteEmployee
+	POST /getEmployee
+
+	Each endpoint corresponds to a procedure. and http method is not operation ? endpoint is
+
+	Request:
+	POST /createEmployee
+	{
+		"name": "John"
+	}
+
+	This mimics calling a function:
+	createEmployee(name="John")
+
+	REST (Representational State Transfer)-
+	Endpoints represent resources, and HTTP methods represent actions. REST USES HTTP SMEANTICS
+
+	Example resource:
+	employees
+
+	Endpoints:
+	GET    		/employees/      -> list employees
+	POST   		/employees/      -> create employee
+	GET    		/employees/5/    -> retrieve employee
+	PUT    		/employees/5/    -> update employee
+	DELETE 		/employees/5/    -> delete employee
+
+	Same URL, different HTTP method = operation.
+
+	Side-by-side comparison-
+
+	Operation			RPC						REST
+	----------------------------------------------------------------
+	list employees		/getEmployees			GET /employees/
+	create employee		/createEmployee			POST /employees/
+	get one employee	/getEmployee?id=5		GET /employees/5/
+	update employee		/updateEmployee			PUT /employees/5/
+	delete employee		/deleteEmployee			DELETE /employees/5/
+
+	DRF is built around REST because DRF generic views assume:
+		resource URL → one class
+		HTTP method → operation
+	So, a single class can handle multiple operations
+
+	REST organizes APIs around data resources.
+	RPC organizes APIs around functions/actions.
+

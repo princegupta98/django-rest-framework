@@ -128,9 +128,13 @@ class EmployeeDetail(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.
 """
 
 # GENERICS View
-class Employees(generics.ListAPIView, generics.CreateAPIView):
+# class Employees(generics.ListAPIView, generics.CreateAPIView):
+class Employees(generics.ListCreateAPIView):
     queryset = Employee.objects.all()
     serializer_class = EmployeeSerializer
 
-class EmployeeDetail(generics.CreateAPIView):
-    pass
+# class EmployeeDetail(generics.RetrieveAPIView, generics.UpdateAPIView, generics.DestroyAPIView):
+class EmployeeDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Employee.objects.all()
+    serializer_class = EmployeeSerializer
+
